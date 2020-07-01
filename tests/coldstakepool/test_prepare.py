@@ -59,7 +59,7 @@ class Test(unittest.TestCase):
                 with self.assertRaises(SystemExit) as cm:
                     prepareSystem.main()
         self.assertEqual(cm.exception.code, 1)
-        self.assertTrue('particl.conf exists' in fake_stderr.getvalue())
+        self.assertTrue('ghost.conf exists' in fake_stderr.getvalue())
 
     def test_prepare_testnet(self):
         testargs = ['coldstakepool-prepare', '--datadir=~/csp_testnet', '--testnet']

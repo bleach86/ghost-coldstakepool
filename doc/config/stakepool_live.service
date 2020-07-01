@@ -1,8 +1,8 @@
 
 [Unit]
-Description=Particl stakepool mainnet
-After=particld_live.service
-Requires=particld_live.service
+Description=Ghost stakepool mainnet
+After=ghostd_live.service
+Requires=ghostd_live.service
 
 [Service]
 ExecStart=/usr/local/bin/coldstakepool-run -datadir=~/stakepoolDemoLive/stakepool

@@ -1,8 +1,8 @@
 {
     "mode": "master",
     "debug": true,
-    "particlbindir": "",
-    "particldatadir": "",
+    "ghostbindir": "",
+    "ghostdatadir": "",
     "startheight": 0,
     "pooladdress": "",
     "rewardaddress": "",

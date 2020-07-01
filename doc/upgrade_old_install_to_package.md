@@ -14,17 +14,17 @@ Install the required packages:
 
 Clone the new code and install package:
 
-    $ git clone https://github.com/particl/coldstakepool particl_stakepool
+    $ git clone https://github.com/akshaynexus/ghost-coldstakepool ghost_stakepool
 
 ```
-$ cd particl_stakepool
+$ cd ghost_stakepool
 $ sudo pip3 install .
 ```
 
 Verify install worked:
 
     $ coldstakepool-run -v
-    Particl coldstakepool version: 0.0.10
+    Ghost coldstakepool version: 0.0.10
 
 Update script path in service files:
 

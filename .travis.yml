@@ -4,7 +4,7 @@ language: python
 python: '3.7'
 cache:
   directories:
-    - $HOME/particl-binaries
+    - $HOME/ghost-binaries
 stages:
   - lint
 env:

@@ -264,7 +264,7 @@ def callrpc(rpc_port, auth, method, params=[], wallet=None):
 
 
 def callrpc_cli(bindir, datadir, chain, cmd):
-    command_cli = os.path.join(bindir, 'particl-cli')
+    command_cli = os.path.join(bindir, 'ghost-cli')
 
     args = command_cli + ('' if chain == 'mainnet' else ' -' + chain) + ' -datadir=' + datadir + ' ' + cmd
     p = subprocess.Popen(args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)

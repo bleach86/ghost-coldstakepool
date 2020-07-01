@@ -1,8 +1,8 @@
 
 [Unit]
-Description=Particl stakepool testnet
-After=particld_test.service
-Requires=particld_test.service
+Description=Ghost stakepool testnet
+After=ghostd_test.service
+Requires=ghostd_test.service
 
 [Service]
 ExecStart=/usr/local/bin/coldstakepool-run -datadir=~/stakepoolDemoTest/stakepool -testnet
