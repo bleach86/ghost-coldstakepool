@@ -1,15 +1,15 @@
 
 [Unit]
-Description=Particl daemon
+Description=Ghost daemon
 After=network.target
 
 [Service]
-ExecStart=/home/stakepooluser/particl-binaries/particld -daemon -datadir=/home/stakepooluser/stakepoolDemoLive -pid=/run/particld/particld.pid
+ExecStart=/home/stakepooluser/ghost-binaries/ghostd -daemon -datadir=/home/stakepooluser/stakepoolDemoLive -pid=/run/ghostd/ghostd.pid
 
-RuntimeDirectory=particld
+RuntimeDirectory=ghostd
 User=stakepooluser
 Type=forking
-PIDFile=/run/particld/particld.pid
+PIDFile=/run/ghostd/ghostd.pid
 Restart=on-failure
 
 # Hardening measures

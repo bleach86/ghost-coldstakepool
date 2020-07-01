@@ -1,7 +1,7 @@
 
-# Particl Cold-Staking Pool - Proof of concept
+# Ghost Cold-Staking Pool - Proof of concept,forked from Particl's Cold staking pool code
 
-[![Build Status](https://travis-ci.org/particl/coldstakepool.svg?branch=master)](https://travis-ci.org/particl/coldstakepool)
+[![Build Status](https://travis-ci.org/akshaynexus/ghost-coldstakepool.svg?branch=master)](https://travis-ci.org/akshaynexus/ghost-coldstakepool)
 
 ## Overview
 

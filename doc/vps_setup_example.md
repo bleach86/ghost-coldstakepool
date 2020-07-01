@@ -22,8 +22,8 @@ $ sudo apt-get install gnupg wget python3 git nginx tmux python3-zmq python3-pip
 Clone `coldstakepool` git repository and install it:
 
 ```
-$ git clone https://github.com/particl/coldstakepool particl_stakepool
-$ cd particl_stakepool
+$ git clone https://github.com/akshaynexus/ghost-coldstakepool ghost_stakepool
+$ cd ghost_stakepool
 $ sudo pip3 install .
 ```
 
@@ -45,22 +45,22 @@ Adjust the startheight parameter to a block before the pool began operating.  Ea
 Copy over `systemd` service files to your system:
 
 ```
-$ sudo cp ~/particl_stakepool/doc/config/*.service /etc/systemd/system
+$ sudo cp ~/ghost_stakepool/doc/config/*.service /etc/systemd/system
 $ sudo systemctl daemon-reload
 ```
 
 Start and enable the services, so they start automatically at system boot:
 
 ```
-$ sudo systemctl start particld_test.service stakepool_test.service
-$ sudo systemctl enable particld_test.service stakepool_test.service
+$ sudo systemctl start ghostd_test.service stakepool_test.service
+$ sudo systemctl enable ghostd_test.service stakepool_test.service
 ```
 
 #### Verify all is running
 
 ```
 $ sudo tail -f /var/log/syslog
-$ ~/particl-binaries/particl-cli -datadir=${HOME}/stakepoolDemoTest getblockchaininfo
+$ ~/ghost-binaries/ghost-cli -datadir=${HOME}/stakepoolDemoTest getblockchaininfo
 $ lynx localhost:9001
 ```
 
@@ -69,7 +69,7 @@ $ lynx localhost:9001
 
 Stop the testnet pool (if running):
 
-    $ sudo systemctl stop particld_test.service stakepool_test.service
+    $ sudo systemctl stop ghostd_test.service stakepool_test.service
 
 ```
 $ coldstakepool-prepare -datadir=~/stakepoolDemoLive
@@ -87,22 +87,22 @@ Adjust the startheight parameter.
 Copy over `systemd` service files to your system:
 
 ```
-$ sudo cp ~/particl_stakepool/doc/config/*.service /etc/systemd/system
+$ sudo cp ~/ghost_stakepool/doc/config/*.service /etc/systemd/system
 $ sudo systemctl daemon-reload
 ```
 
 Start and enable the services, so they start automatically at system boot:
 
 ```
-$ sudo systemctl start particld_live.service stakepool_live.service
-$ sudo systemctl enable particld_live.service stakepool_live.service
+$ sudo systemctl start ghostd_live.service stakepool_live.service
+$ sudo systemctl enable ghostd_live.service stakepool_live.service
 ```
 
 #### Verify all is running
 
 ```
 $ sudo tail -f /var/log/syslog
-$ ~/particl-binaries/particl-cli -datadir=${HOME}/stakepoolDemoLive getblockchaininfo
+$ ~/ghost-binaries/ghost-cli -datadir=${HOME}/stakepoolDemoLive getblockchaininfo
 $ lynx localhost:9000
 ```
 
@@ -110,7 +110,7 @@ $ lynx localhost:9000
 
 ```
 $ sudo rm /etc/nginx/sites-enabled/default
-$ sudo cp ~/particl_stakepool/doc/config/nginx_stakepool_forward.conf /etc/nginx/conf.d/
+$ sudo cp ~/ghost_stakepool/doc/config/nginx_stakepool_forward.conf /etc/nginx/conf.d/
 ```
 
     $ sudo nginx -t
@@ -141,7 +141,7 @@ The production configuration enables:
 ```
 $ mkdir /tmp/nginx
 $ sudo rm /etc/nginx/conf.d/nginx_stakepool_forward.conf
-$ sudo cp ~/particl_stakepool/doc/config/nginx_stakepool_production.conf /etc/nginx/conf.d/
+$ sudo cp ~/ghost_stakepool/doc/config/nginx_stakepool_production.conf /etc/nginx/conf.d/
 $ sudo systemctl restart nginx
 ```
 
@@ -170,8 +170,8 @@ $ sudo apt-get update && sudo apt-get install yarn
 Clone & install fancy frontend
 
 ```
-$ git clone https://github.com/gerlofvanek/particl-coldstakepool-front
-$ cd particl-coldstakepool-front
+$ git clone https://github.com/gerlofvanek/ghost-coldstakepool-front
+$ cd ghost-coldstakepool-front
 $ yarn install
 $ yarn run build
 $ cp -R dist /var/www/html/pool

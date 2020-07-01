@@ -23,7 +23,7 @@ class HttpHandler(BaseHTTPRequestHandler):
     def page_error(self, error_str):
         content = '<!DOCTYPE html><html lang="en">\n<head>' \
             + '<meta charset="UTF-8">' \
-            + '<title>Particl Stake Pool Error</title></head>' \
+            + '<title>Ghost Stake Pool Error</title></head>' \
             + '<body>' \
             + '<p>Error: ' + error_str + '</p>' \
             + '<p><a href=\'/\'>home</a></p>' \
@@ -62,8 +62,8 @@ class HttpHandler(BaseHTTPRequestHandler):
 
         with open(settings_path) as fs:
             settings = json.load(fs)
-        settings['particlbindir'] = '...'
-        settings['particldatadir'] = '...'
+        settings['ghostbindir'] = '...'
+        settings['ghostdatadir'] = '...'
         settings['poolownerwithdrawal'] = '...'
         settings.pop('management_key_salt', None)
         settings.pop('management_key_hash', None)
@@ -82,7 +82,7 @@ class HttpHandler(BaseHTTPRequestHandler):
 
         content = '<!DOCTYPE html><html lang="en">\n<head>' \
             + '<meta charset="UTF-8">' \
-            + '<title>Particl Stake Pool Address </title></head>' \
+            + '<title>Ghost Stake Pool Address </title></head>' \
             + '<body>' \
             + '<h2>Spend Address ' + address_str + '</h2>' \
             + '<h4>Pool Address ' + stakePool.poolAddr + '</h4>'
@@ -111,9 +111,9 @@ class HttpHandler(BaseHTTPRequestHandler):
 
         content = '<!DOCTYPE html><html lang="en">\n<head>' \
             + '<meta charset="UTF-8">' \
-            + '<title>Particl Stake Pool Demo</title></head>' \
+            + '<title>Ghost Stake Pool Demo</title></head>' \
             + '<body>' \
-            + '<h2>Particl Stake Pool Demo</h2>' \
+            + '<h2>Ghost Stake Pool Demo</h2>' \
             + '<p>' \
             + 'Pool Version: ' + versions['pool'] + '<br/>' \
             + 'Core Version: ' + versions['core'] + '<br/>' \
@@ -131,9 +131,9 @@ class HttpHandler(BaseHTTPRequestHandler):
 
         content = '<!DOCTYPE html><html lang="en">\n<head>' \
             + '<meta charset="UTF-8">' \
-            + '<title>Particl Stake Pool Demo</title></head>' \
+            + '<title>Ghost Stake Pool Demo</title></head>' \
             + '<body>' \
-            + '<h2>Particl Stake Pool Demo</h2>' \
+            + '<h2>Ghost Stake Pool Demo</h2>' \
             + '<p>' \
             + 'Mode: ' + summary['poolmode'] + '<br/>' \
             + 'Pool Address: ' + stakePool.poolAddr + '<br/>' \
@@ -182,9 +182,9 @@ class HttpHandler(BaseHTTPRequestHandler):
     def page_help(self):
         content = '<!DOCTYPE html><html lang="en">\n<head>' \
             + '<meta charset="UTF-8">' \
-            + '<title>Particl Stake Pool Demo</title></head>' \
+            + '<title>Ghost Stake Pool Demo</title></head>' \
             + '<body>' \
-            + '<h2>Particl Stake Pool Demo</h2>' \
+            + '<h2>Ghost Stake Pool Demo</h2>' \
             + '<h3>Help</h3>' \
             + '<p>' \
             + '</p></body></html>'
