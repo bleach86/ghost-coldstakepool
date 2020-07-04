@@ -61,7 +61,7 @@ GHOSTD = os.getenv('GHOSTD', 'ghostd')
 GHOST_TX = os.getenv('GHOST_TX', 'ghost-tx')
 GHOST_CLI = os.getenv('GHOST_CLI', 'ghost-cli')
 
-GHOST_VERSION = os.getenv('GHOST_VERSION', '0.19.1.5')
+GHOST_VERSION = os.getenv('GHOST_VERSION', '0.19.1.6')
 GHOST_VERSION_TAG = os.getenv('GHOST_VERSION_TAG', '')
 GHOST_ARCH = os.getenv('GHOST_ARCH', 'x86_64-linux-gnu.tar.gz')
 GHOST_REPO = os.getenv('GHOST_REPO', 'ghost-coin')
@@ -95,8 +95,8 @@ def downloadGhostCore():
         os_dir_name = 'linux'
         os_name = 'linux'
 
-    signing_key_fingerprint = '8E517DC12EC1CC37F6423A8A13F13651C9CF0D6B'
-    signing_key_name = 'tecnovert'
+    signing_key_fingerprint = '65D0B48F5E1641270DB47D09F99F090A3D9467EE'
+    signing_key_name = 'akshaynexus'
 
     if os_dir_name == 'win-signed':
         assert_filename = 'ghost-{}-build.assert'.format(os_name)
