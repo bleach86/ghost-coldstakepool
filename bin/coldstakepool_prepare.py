@@ -95,8 +95,8 @@ def downloadGhostCore():
         os_dir_name = 'linux'
         os_name = 'linux'
 
-    signing_key_fingerprint = '8E517DC12EC1CC37F6423A8A13F13651C9CF0D6B'
-    signing_key_name = 'tecnovert'
+    signing_key_fingerprint = '65D0B48F5E1641270DB47D09F99F090A3D9467EE'
+    signing_key_name = 'akshaynexus'
 
     if os_dir_name == 'win-signed':
         assert_filename = 'ghost-{}-build.assert'.format(os_name)
