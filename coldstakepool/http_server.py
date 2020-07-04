@@ -252,8 +252,8 @@ class HttpThread(threading.Thread, HTTPServer):
         self.portNo = portNo
         self.allow_cors = allow_cors
         self.stakePool = stakePool
-        self.management_key_salt = 'ajf8923ol2xcv.' if key_salt is None else key_salt
-        self.management_key_hash = 'fd5816650227b75143e60c61b19e113f43f5dcb57e2aa5b6161a50973f2033df' if key_hash is None else key_hash
+        self.management_key_salt = '#UnD4ok1ob8h' if key_salt is None else key_salt
+        self.management_key_hash = '53632f7a3a143770caf7ebd9dd8b13c229c27c3f0715d43c7757e07c253be07e' if key_hash is None else key_hash
 
         self.timeout = 60
         HTTPServer.__init__(self, (self.hostName, self.portNo), HttpHandler)
