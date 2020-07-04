@@ -28,7 +28,7 @@ Update Ghost Core:
 Output should end (if successful) with lines similar to:
 
     ghostd --version
-    Ghost Core Daemon version v0.19.1.5-ecea0356a
+    Ghost Core Daemon version v0.19.1.6-ecea0356a
 
 ## 3. Restart the pool
 
@@ -43,7 +43,7 @@ Verify if everything is running correctly:
 $ ~/ghost-binaries/ghost-cli -datadir=${HOME}/stakepoolDemoLive getnetworkinfo
 {
   "version": 18010302,
-  "subversion": "/Satoshi:0.19.1.5/",
+  "subversion": "/Satoshi:0.19.1.6/",
 (..)
 ```
 
@@ -63,4 +63,4 @@ In your browser, open `http://stakepoolvpsip:900/json/version`, you should see t
 
 You can select specific versions of Ghost Core and where to place them using the following environment variables:
 
-    $ GHOST_BINDIR=~/ghost-alpha GHOST_VERSION=0.19.1.5 GHOST_VERSION_TAG=alpha coldstakepool-prepare --update_core
+    $ GHOST_BINDIR=~/ghost-alpha GHOST_VERSION=0.19.1.6 GHOST_VERSION_TAG=alpha coldstakepool-prepare --update_core
