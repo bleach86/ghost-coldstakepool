@@ -137,7 +137,7 @@ def downloadGhostCore():
         subprocess.check_call(['gpg', '--list-keys', signing_key_fingerprint])
     except Exception:
         print('Downloading release signing pubkey')
-        keyservers = ['keyserver.ubuntu.com', 'hkp://subset.pool.sks-keyservers.net']
+        keyservers = ['keyserver.ubuntu.com','keys.openpgp.org', 'hkp://subset.pool.sks-keyservers.net']
         for ks in keyservers:
             try:
                 subprocess.check_call(['gpg', '--keyserver', ks, '--recv-keys', signing_key_fingerprint])
