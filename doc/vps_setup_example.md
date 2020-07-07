@@ -1,4 +1,4 @@
-# Stakepool Setup on Ubuntu Xenial
+# Stakepool Setup on Ubuntu Bionic
 
 This example should be run as a user named `stakepooluser`. To run as a different user replace all instances of `stakepooluser` with your username both in this guide and in the `.service` files in the config directory; eg:
 
@@ -38,10 +38,19 @@ Stake address: tpcs1mwk4e0z4ll8p6n6wl0hm8l9slyf2vcgjatzwxh
 Reward address: poiXfkxxB5eeEgvL3MZN1pxPq9Bfwh7tEm
 ```
 
-Adjust the startheight parameter to a block before the pool began operating.  Earlier blocks won't be scanned by the pool:
+Adjust the startheight parameter to current block count - 101.  Earlier blocks won't be scanned by the pool:
 
     $ vi ~/stakepoolDemoTest/stakepool/stakepool.json
 
+Add pool owner fee payout obj to the stakepool.json.
+```
+    "poolownerwithdrawal": {
+        "frequency": 720,
+        "address": "...",
+        "reserve": 2,
+        "threshold": 5
+    }
+```
 Copy over `systemd` service files to your system:
 
 ```
@@ -80,9 +89,20 @@ Stake address: pcs14ch7w7ue2q8kadljsl42wehfw8tm99yxsez4kz
 Reward address: PbXgDsRurjpCYXxNryin13h86ufks9zh6o
 ```
 
-Adjust the startheight parameter.
+Adjust the startheight parameter to current block count - 101.
 
     $ vi ~/stakepoolDemoLive/stakepool/stakepool.json
+
+Add pool owner fee payout obj to the stakepool.json.
+```
+    "poolownerwithdrawal": {
+        "frequency": 720,
+        "address": "...",
+        "reserve": 2,
+        "threshold": 5
+    }
+```
+Change the addr to your public address,frequency is in blocks.
 
 Copy over `systemd` service files to your system:
 
@@ -170,7 +190,7 @@ $ sudo apt-get update && sudo apt-get install yarn
 Clone & install fancy frontend
 
 ```
-$ git clone https://github.com/gerlofvanek/ghost-coldstakepool-front
+$ git clone https://github.com/akshaynexus/ghost-coldstakepool-front
 $ cd ghost-coldstakepool-front
 $ yarn install
 $ yarn run build
@@ -184,9 +204,7 @@ Setup TLS:
 ```
 $ sudo apt-get update
 $ sudo apt-get install software-properties-common
-$ sudo add-apt-repository ppa:certbot/certbot
-$ sudo apt-get update
-$ sudo apt-get install python-certbot-nginx
+$ sudo apt-get install certbot python3-certbot-nginx
 ```
 
 Create the certificates, enter your domain name in the interactive wizard:
