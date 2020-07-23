@@ -864,13 +864,13 @@ class StakePool():
         addrs = []
         address_str = ""
         db = plyvel.DB(self.dbPath, create_if_missing=True)
-        ## Go through current db and get all addresses
+        # Go through current db and get all addresses
         for key, value in db.iterator(prefix=bytes([DBT_BAL])):
-            #Get current addr
+            # Get current addr
             address_str = encodeAddress(key[1:])
             print('Adding address ' + address_str)
             addrs.append(address_str)
-        #Now go through and get summaries
+        # Now go through and get summaries
         for addr in addrs:
             rv = {}
             # TODO: bech32 decode and test chain
@@ -882,22 +882,21 @@ class StakePool():
             n = db.get(dbkey)
             if n is not None:
                 rv['address'] = addr
-                rv['accumulated'] = int.from_bytes(n[:16], 'big')  / COIN
+                rv['accumulated'] = int.from_bytes(n[:16], 'big') / COIN
                 rv['rewardpending'] = int.from_bytes(n[16:24], 'big') / COIN
                 rv['rewardpaidout'] = int.from_bytes(n[24:32], 'big') / COIN
                 rv['laststaking'] = int.from_bytes(n[32:40], 'big') / COIN
             shouldadd = rv['laststaking'] > 0
             if shouldadd:
                 utxos = callrpc(self.rpc_port, self.rpc_auth, 'listunspent',
-                            [1, 9999999, [address_str, ], True, {'include_immature': True}], 'pool_stake')
+                                [1, 9999999, [address_str, ], True, {'include_immature': True}], 'pool_stake')
                 totalCoinCurrent = 0
                 for utxo in utxos:
                     totalCoinCurrent += int(decimal.Decimal(utxo['amount']))
                 rv['currenttotal'] = totalCoinCurrent
                 addrdata.append(rv)
-        #Finally close iterator and db
         db.close()
-        #Finally give out data of addrs
+        # Finally give out data of addrs
         return addrdata
 
     @getDBMutex
