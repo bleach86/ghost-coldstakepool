@@ -41,6 +41,20 @@ class HttpHandler(BaseHTTPRequestHandler):
         stakePool = self.server.stakePool
         return bytes(json.dumps(stakePool.getAddressSummary(address_str)), 'UTF-8')
 
+    def js_address_list(self):
+        addrdata = []
+        address_str = ""
+        stakePool = self.server.stakePool
+        ## Go through current db of balances and get addresses
+        for key, value in db.iterator(prefix=bytes([DBT_BAL])):
+            #Get current addr
+            address_str = encodeAddress(key[1:])
+            if address_str != "":
+                #Get addr summary and append it to addrdata
+                addrdata.append(stakePool.getAddressSummary(address))
+        #Finally give out data of addrs
+        return bytes(json.dumps(addrdata), 'UTF-8')
+
     def js_metrics(self, urlSplit):
         stakePool = self.server.stakePool
         if len(urlSplit) > 3:
@@ -218,6 +232,8 @@ class HttpHandler(BaseHTTPRequestHandler):
                             return bytes(json.dumps(self.server.stakePool.getVersions()), 'UTF-8')
                         if urlSplit[2] == 'address':
                             return self.js_address(urlSplit)
+                        if urlSplit[2] == 'addresslist':
+                            return self.js_address_list()
                         if urlSplit[2] == 'metrics':
                             return self.js_metrics(urlSplit)
                     return self.js_index(urlSplit)
