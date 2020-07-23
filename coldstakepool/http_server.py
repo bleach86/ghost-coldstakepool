@@ -42,18 +42,8 @@ class HttpHandler(BaseHTTPRequestHandler):
         return bytes(json.dumps(stakePool.getAddressSummary(address_str)), 'UTF-8')
 
     def js_address_list(self):
-        addrdata = []
-        address_str = ""
         stakePool = self.server.stakePool
-        ## Go through current db of balances and get addresses
-        for key, value in db.iterator(prefix=bytes([DBT_BAL])):
-            #Get current addr
-            address_str = encodeAddress(key[1:])
-            if address_str != "":
-                #Get addr summary and append it to addrdata
-                addrdata.append(stakePool.getAddressSummary(address))
-        #Finally give out data of addrs
-        return bytes(json.dumps(addrdata), 'UTF-8')
+        return bytes(json.dumps(stakePool.getAddressListSummary()), 'UTF-8')
 
     def js_metrics(self, urlSplit):
         stakePool = self.server.stakePool
