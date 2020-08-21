@@ -43,7 +43,7 @@ class HttpHandler(BaseHTTPRequestHandler):
 
     def js_address_list(self):
         stakePool = self.server.stakePool
-        return bytes(json.dumps(stakePool.getAddressListSummary()), 'UTF-8')
+        return bytes(json.dumps(stakePool.getAddressListSummary(True, None)), 'UTF-8')
 
     def js_metrics(self, urlSplit):
         stakePool = self.server.stakePool
