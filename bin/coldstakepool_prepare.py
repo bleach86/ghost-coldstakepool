@@ -61,9 +61,9 @@ GHOSTD = os.getenv('GHOSTD', 'ghostd')
 GHOST_TX = os.getenv('GHOST_TX', 'ghost-tx')
 GHOST_CLI = os.getenv('GHOST_CLI', 'ghost-cli')
 
-GHOST_VERSION = os.getenv('GHOST_VERSION', '0.19.1.9')
+GHOST_VERSION = os.getenv('GHOST_VERSION', '0.19.1.10')
 GHOST_VERSION_TAG = os.getenv('GHOST_VERSION_TAG', '')
-GHOST_ARCH = os.getenv('GHOST_ARCH', 'x86_64-linux-gnu.tar.gz')
+GHOST_ARCH = os.getenv('GHOST_ARCH', 'x86_64-linux-gnu.tgz')
 GHOST_REPO = os.getenv('GHOST_REPO', 'ghost-coin')
 
 
@@ -95,26 +95,8 @@ def downloadGhostCore():
         os_dir_name = 'linux'
         os_name = 'linux'
 
-    signing_key_fingerprint = '65D0B48F5E1641270DB47D09F99F090A3D9467EE'
-    signing_key_name = 'akshaynexus'
-
-    if os_dir_name == 'win-signed':
-        assert_filename = 'ghost-{}-build.assert'.format(os_name)
-    else:
-        assert_filename = 'ghost-{}-{}-build.assert'.format(os_name, GHOST_VERSION)
-
-    assert_url = 'https://raw.githubusercontent.com/%s/gitian.sigs/master/%s-%s/%s/%s' % (GHOST_REPO, GHOST_VERSION + GHOST_VERSION_TAG, os_dir_name, signing_key_name, assert_filename)
-    assert_path = os.path.join(GHOST_BINDIR, assert_filename)
-
     release_filename = 'ghost-{}-{}'.format(GHOST_VERSION, GHOST_ARCH)
     release_url = 'https://github.com/%s/ghost-core/releases/download/v%s/%s' % (GHOST_REPO, GHOST_VERSION + GHOST_VERSION_TAG, release_filename)
-
-    if not os.path.exists(assert_path):
-        subprocess.check_call(['wget', assert_url, '-P', GHOST_BINDIR])
-
-    sig_path = os.path.join(GHOST_BINDIR, 'ghost-%s-%s-build.assert.sig' % (os_name, GHOST_VERSION))
-    if not os.path.exists(sig_path):
-        subprocess.check_call(['wget', assert_url + '.sig?raw=true', '-O', sig_path])
 
     packed_path = os.path.join(GHOST_BINDIR, release_filename)
     if not os.path.exists(packed_path):
@@ -126,32 +108,6 @@ def downloadGhostCore():
     release_hash = hasher.digest()
 
     print('Release hash:', release_hash.hex())
-    with open(assert_path, 'rb', 0) as fp, mmap.mmap(fp.fileno(), 0, access=mmap.ACCESS_READ) as s:
-        if s.find(bytes(release_hash.hex(), 'utf-8')) == -1:
-            sys.stderr.write('Error: release hash %s not found in assert file.' % (release_hash.hex()))
-            exit(1)
-        else:
-            print('Found release hash %s in assert file.' % (release_hash.hex()))
-
-    try:
-        subprocess.check_call(['gpg', '--list-keys', signing_key_fingerprint])
-    except Exception:
-        print('Downloading release signing pubkey')
-        keyservers = ['keyserver.ubuntu.com', 'keys.openpgp.org', 'hkp://subset.pool.sks-keyservers.net']
-        for ks in keyservers:
-            try:
-                subprocess.check_call(['gpg', '--keyserver', ks, '--recv-keys', signing_key_fingerprint])
-            except Exception:
-                continue
-            break
-        subprocess.check_call(['gpg', '--list-keys', signing_key_fingerprint])
-
-    try:
-        subprocess.check_call(['gpg', '--verify', sig_path, assert_path])
-    except Exception:
-        sys.stderr.write('Error: Signature verification failed!')
-        exit(1)
-
 
 def extractGhostCore():
     packed_path = os.path.join(GHOST_BINDIR, 'ghost-{}-{}'.format(GHOST_VERSION, GHOST_ARCH))
