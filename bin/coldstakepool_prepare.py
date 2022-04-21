@@ -63,7 +63,7 @@ GHOST_CLI = os.getenv('GHOST_CLI', 'ghost-cli')
 
 GHOST_VERSION = os.getenv('GHOST_VERSION', '0.21.1.2')
 GHOST_VERSION_TAG = os.getenv('GHOST_VERSION_TAG', '')
-GHOST_ARCH = os.getenv('GHOST_ARCH', 'x86_64-linux-gnu.tgz')
+GHOST_ARCH = os.getenv('GHOST_ARCH', 'x86_64-linux-gnu.tar.gz')
 GHOST_REPO = os.getenv('GHOST_REPO', 'ghost-coin')
 
 
@@ -118,7 +118,7 @@ def extractGhostCore():
     with tarfile.open(packed_path) as ft:
         for b in bins:
             out_path = os.path.join(bin_prefix, b)
-            fi = ft.extractfile('{}-{}/bin/{}'.format('ghost', GHOST_VERSION, b))
+            fi = ft.extractfile('{}-{}/{}'.format('ghost', GHOST_VERSION, b))
             with open(out_path, 'wb') as fout:
                 fout.write(fi.read())
             fi.close()
@@ -314,9 +314,11 @@ def main():
 
         # 3. Generate and import a recovery phrase for both wallets.
         if stake_wallet_mnemonic is None:
+            callrpc_cli(GHOST_BINDIR, dataDir, chain, 'createwallet "pool_stake"')
             stake_wallet_mnemonic = callrpc_cli(GHOST_BINDIR, dataDir, chain, 'mnemonic new')['mnemonic']
 
         if reward_wallet_mnemonic is None:
+            callrpc_cli(GHOST_BINDIR, dataDir, chain, 'createwallet "pool_reward"')
             reward_wallet_mnemonic = callrpc_cli(GHOST_BINDIR, dataDir, chain, 'mnemonic new')['mnemonic']
 
         callrpc_cli(GHOST_BINDIR, dataDir, chain, '-rpcwallet=pool_stake extkeyimportmaster "%s"' % (stake_wallet_mnemonic))
