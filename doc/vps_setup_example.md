@@ -22,7 +22,7 @@ $ sudo apt-get install gnupg wget python3 git nginx tmux python3-zmq python3-pip
 Clone `coldstakepool` git repository and install it:
 
 ```
-$ git clone https://github.com/akshaynexus/ghost-coldstakepool ghost_stakepool
+$ git clone https://github.com/ghost-coin/ghost-coldstakepool ghost_stakepool
 $ cd ghost_stakepool
 $ sudo pip3 install .
 ```
